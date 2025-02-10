@@ -1,0 +1,39 @@
+package statePattern;
+
+public class SuspendedState implements AccountState {
+    private Account account;
+
+    public SuspendedState(Account account) { this.account = account; }
+
+    @Override
+    public void deposit(Double amount) {
+        account.setBalance(account.getBalance() + amount);
+        System.out.println("Deposited $" + amount + ". " + account.toString());
+    }
+
+    @Override
+    public void withdraw(Double amount) {
+        System.out.println("Cannot withdraw from a suspended account.");
+    }
+
+    @Override
+    public void suspend() {
+        System.out.println("Account is already suspended!");
+    }
+
+    @Override
+    public void activate() {
+        account.setAccountState(new ActiveState(account));
+        System.out.println("Account is activated!");
+    }
+
+    @Override
+    public void closed() {
+        if (account.getBalance() == 0) {
+            account.setAccountState(new ClosedState(account));
+            System.out.println("Account is closed!");
+        } else {
+            System.out.println("Cannot close account with non-zero balance.");
+        }
+    }
+}
