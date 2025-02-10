@@ -23,7 +23,7 @@ public class Account {
     public void withdraw(Double amount) { accountState.withdraw(amount); }
     public void suspend() { accountState.suspend(); }
     public void activate() { accountState.activate(); }
-    public void closed() { accountState.closed(); } // Renamed to match test case
+    public void closed() { accountState.closed(); }
 
     @Override
     public String toString() {
